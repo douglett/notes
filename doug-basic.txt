@@ -1,0 +1,35 @@
+program = 
+	[ define_block ]
+	{ subroutine } ;
+ 
+define_block =
+	[ "const" ident "=" number { "," ident "=" number } ]
+	[ "var" ident {"," ident} ] ;
+
+subroutine = 
+	"sub" ident
+	[ define_block ]
+	{ statement }
+	"end" "sub" ;
+ 
+statement =
+	ident "=" expression
+	| "call" ident
+	| "begin" statement { "endl" statement } [endl] "end"
+	| "if" condition "then" statement
+	| "while" condition "do" statement ;
+ 
+condition =
+	expression { ("="|"!="|"<"|"<="|">"|">=") expression } ;
+ 
+expression = 
+	["+"|"-"] term { ("+"|"-") term } ;
+ 
+term = 
+	factor { ("*"|"/") factor } ;
+ 
+factor = 
+	ident | number | "(" expression ")" ;
+
+endl = 
+	"\n" | ";" ;
