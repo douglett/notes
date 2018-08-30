@@ -4,7 +4,7 @@ program =
  
 define_block =
 	[ "const" ident "=" number { "," ident "=" number } ]
-	[ "var" ident {"," ident} ] ;
+	[ "dim" ident {"," ident} ] ;
 
 subroutine = 
 	"sub" ident
