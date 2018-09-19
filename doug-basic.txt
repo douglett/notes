@@ -37,4 +37,4 @@ factor =
 	ident | number | "(" expression ")" ;
 
 endl = 
-	"\n" | ";" { endl } ;
+	("\n"|";") { endl } ;
