@@ -3,21 +3,26 @@ program =
 	{ subroutine } ;
  
 define_block =
-	[ "const" ident "=" number { "," ident "=" number } ]
-	[ "dim" ident {"," ident} ] ;
+	{ "const" ident "=" number endl }
+	{ "dim" ident endl } ;
 
 subroutine = 
-	"sub" ident
+	"sub" ident endl
 	[ define_block ]
-	{ statement }
-	"end" "sub" ;
+	{ statement endl }
+	"end" "sub" endl ;
  
 statement =
 	ident "=" expression
 	| "call" ident
-	| "begin" { endl statement } endl "end"
-	| "if" condition "then" statement
-	| "while" condition "do" statement ;
+	| "return"
+	// | "begin" { endl statement } endl "end"
+	| "if" condition "then" endl statement_block "end" "if"
+	| "while" condition "do" endl statement_block "wend" ;
+	
+statement_block =
+	{ endl }
+	{ statement endl } ;
  
 condition =
 	expression { ("="|"!="|"<"|"<="|">"|">=") expression } ;
@@ -32,4 +37,4 @@ factor =
 	ident | number | "(" expression ")" ;
 
 endl = 
-	"\n" | ";" ;
+	"\n" | ";" { endl } ;
