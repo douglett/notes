@@ -15,7 +15,7 @@ subroutine =
 statement =
 	ident "=" expression
 	| "call" ident
-	| "begin" statement { "endl" statement } [endl] "end"
+	| "begin" { endl statement } endl "end"
 	| "if" condition "then" statement
 	| "while" condition "do" statement ;
  
