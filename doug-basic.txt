@@ -18,7 +18,8 @@ statement =
 	| "return"
 	// | "begin" { endl statement } endl "end"
 	| "if" condition "then" endl statement_block "end" "if"
-	| "while" condition "do" endl statement_block "wend" ;
+	| "while" condition "do" endl statement_block "wend" 
+	| "print" (id | number) { id | number } ;
 	
 statement_block =
 	{ endl }
